@@ -4,18 +4,20 @@ import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+// 테스트 이름 _를 제거한다.
+@DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class StudyTest {
 
     // public juint4에서는 사용해야하지만
     // junit5에서는 생략해도 된다.
-
     @Test
+    @DisplayName("스터디 만들기 \uD83D\uDE31")
     void create(){
         Study study = new Study();
         assertNotNull(study);
     }
     @Test
-    @Disabled // 테스트를 원치 않을 경우 권잗하지 않음
+    @DisplayName("스터디 만들기 *%$#@!^&^%&^")
     // 여러 상황에 사용될 수 있다.
     void create1(){
         System.out.println("create1");
