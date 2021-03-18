@@ -17,17 +17,16 @@ class StudyTest {
 
     // ./mvnw test -P ci
 
-    @Test
+
     @DisplayName("스터디 만들기 fast")
-    @Tag("fast")
+    @FastTest
     void create_new_study() {
         Study study = new Study(10);
         assertThat(study.getLimit()).isGreaterThan(0);
     }
 
-    @Test
     @DisplayName("스터디 만들기 slow")
-    @Tag("slow")
+    @SlowTest
     void create_new_study_again() {
         System.out.println("create1");
     }
