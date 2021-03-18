@@ -16,15 +16,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 // Junit5의 새로운 기능
-//
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class StudyTest {
     // @TestInstance 설정 전 == Junit 기본 전략
     // create_new_study, create_new_study_again
     // 각 인스턴스로 실행하여 i 출력값 이 전부 1이 된다.
     int i = 1;
 
+    @Order(2)
     @DisplayName("스터디 만들기 fast")
     @FastTest
     void create_new_study() {
@@ -33,7 +33,7 @@ class StudyTest {
         System.out.println(this);
         assertThat(study.getLimit()).isGreaterThan(0);
     }
-
+    @Order(1)
     @DisplayName("스터디 만들기 slow")
     @SlowTest
     void create_new_study_again() {
@@ -42,12 +42,14 @@ class StudyTest {
         System.out.println("create1");
     }
 
+    @Order(4)
     @DisplayName("스터디 만들기 RepeatedTest")
     @RepeatedTest(value = 10, name = "{displayName}, {currentRepetition}/{totalRepetitions}")
     void repeatTest(RepetitionInfo repetitionInfo) {
         System.out.println("test" + repetitionInfo.getCurrentRepetition() + "/" + repetitionInfo.getTotalRepetitions());
     }
 
+    @Order(3)
     @DisplayName("스터디 만들기 ParameterizedTest")
     @ParameterizedTest(name = "{index} {displayName} message={0}")
     @CsvSource({"10, '자바 스터디'", "20, 스프링"})
@@ -74,12 +76,12 @@ class StudyTest {
     }
 
     @BeforeAll
-     void beforeAll() {
+    static void beforeAll() {
         System.out.println("before all");
     }
 
     @AfterAll
-     void afterAll() {
+    static void afterAll() {
         System.out.println("after all");
     }
 
