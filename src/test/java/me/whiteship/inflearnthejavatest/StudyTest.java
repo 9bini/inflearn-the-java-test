@@ -12,38 +12,23 @@ import static org.junit.jupiter.api.Assumptions.assumingThat;
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class StudyTest {
 
+    // fast 태그만 달린 테스트 메소드만 실행하고 싶으면
+    // 실행 설정을 클래스에서 태그로 설정을 바꾸고 테스트 하고 싶은 태그명을 입력해야한다.
+
+    // ./mvnw test -P ci
 
     @Test
-    @DisplayName("스터디 만들기 \uD83D\uDE31")
-    @EnabledOnOs({OS.MAC, OS.LINUX})
-    @EnabledOnJre({JRE.JAVA_11})
-    @EnabledIfEnvironmentVariable(named = "TEST_ENV", matches = "LOCAL")
+    @DisplayName("스터디 만들기 fast")
+    @Tag("fast")
     void create_new_study() {
-        // 특정한 os, 환경변수, java 버전등을 테스트해야할 때 사용
-        String test_env = System.getenv("TEST_ENV");
-
-        assumingThat("LOCAL".equalsIgnoreCase(test_env), ()->{
-            System.out.println("test_env = " + test_env);
-            Study study = new Study(100);
-            assertThat(study.getLimit()).isGreaterThan(0);
-        });
-
-        assumingThat("9bin".equalsIgnoreCase(test_env), ()->{
-            System.out.println("test_env = " + test_env);
-            Study study = new Study(10);
-            assertThat(study.getLimit()).isGreaterThan(0);
-        });
-        assumeTrue("LOCAL".equalsIgnoreCase(test_env));
-
-        // test_env가 local이 아니기 때문에 아래 테스트 코드가 동작하지 않는다.
         Study study = new Study(10);
         assertThat(study.getLimit()).isGreaterThan(0);
     }
 
     @Test
-    @DisplayName("스터디 만들기 *%$#@!^&^%&^")
-    @EnabledOnJre(JRE.OTHER)
-    void create1() {
+    @DisplayName("스터디 만들기 slow")
+    @Tag("slow")
+    void create_new_study_again() {
         System.out.println("create1");
     }
 
