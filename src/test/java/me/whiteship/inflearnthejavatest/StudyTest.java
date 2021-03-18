@@ -15,7 +15,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-@DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 // Junit5의 새로운 기능
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class StudyTest {
